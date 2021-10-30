@@ -33,14 +33,14 @@ public class Media implements TimelineItem, CursorHandler, Parcelable {
 
     private static final String[] sProjection = new String[]{
             MediaStore.Images.Media.DATA,
-            MediaStore.Images.Media.DATE_TAKEN,
+            MediaStore.Images.Media.DATE_MODIFIED,
             MediaStore.Images.Media.MIME_TYPE,
             MediaStore.Images.Media.SIZE,
             MediaStore.Images.Media.ORIENTATION
     };
 
     private static final int CURSOR_POS_DATA = ArrayUtils.getIndex(sProjection, MediaStore.Images.Media.DATA);
-    private static final int CURSOR_POS_DATE_TAKEN = ArrayUtils.getIndex(sProjection, MediaStore.Images.Media.DATE_TAKEN);
+    private static final int CURSOR_POS_DATE_MODIFIED= ArrayUtils.getIndex(sProjection, MediaStore.Images.Media.DATE_MODIFIED);
     private static final int CURSOR_POS_MIME_TYPE = ArrayUtils.getIndex(sProjection, MediaStore.Images.Media.MIME_TYPE);
     private static final int CURSOR_POS_SIZE = ArrayUtils.getIndex(sProjection, MediaStore.Images.Media.SIZE);
     private static final int CURSOR_POS_ORIENTATION = ArrayUtils.getIndex(sProjection, MediaStore.Images.Media.ORIENTATION);
@@ -82,7 +82,7 @@ public class Media implements TimelineItem, CursorHandler, Parcelable {
 
     public Media(@NotNull Cursor cur) {
         this.path = cur.getString(CURSOR_POS_DATA);
-        this.dateModified = cur.getLong(CURSOR_POS_DATE_TAKEN);
+        this.dateModified = cur.getLong(CURSOR_POS_DATE_MODIFIED) * 1000l;
         this.mimeType = cur.getString(CURSOR_POS_MIME_TYPE);
         this.size = cur.getLong(CURSOR_POS_SIZE);
         this.orientation = cur.getInt(CURSOR_POS_ORIENTATION);
